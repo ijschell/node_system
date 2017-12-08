@@ -19,19 +19,18 @@ app.use(express.static(__dirname + '/public'));
 
 
 // get config
-var config;
-var author = 'Jonathan Schell';
 database.select("SELECT * FROM config", function(data){
     // get config from database
-    config = data[0];
+    app.set('config', data[0]);
+    app.set('author', 'Jonathan Schell');
 })
 
 
 app.get('/', function(req, res){
 
     res.render(client + '/views/home', {
-        config : config,
-        author : author
+        config : app.get('config'),
+        author : app.get('author')
     });
 
 })
