@@ -29,7 +29,7 @@ database.select("SELECT * FROM config", function(data){
 
 app.get('/', function(req, res){
 
-    res.render(client + '/index', {
+    res.render(client + '/views/home', {
         config : config,
         author : author
     });
