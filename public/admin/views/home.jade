@@ -1,0 +1,18 @@
+include head.jade
+
+h1 #{admin}
+
+form(action="save" method="post")
+    input(type="hidden" name="section" value="config")
+    label Título
+    input(type="text" name="title")
+    br
+    label Descripción
+    input(type="text" name="description")
+    br
+    label Keywords
+    input(type="text" name="keywords")
+    br
+    input(type="submit" value="Guardar")
+
+include footer.jade

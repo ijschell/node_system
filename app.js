@@ -2,10 +2,12 @@
 var http = require('http');
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 
 
 // extra modules
-var database = require('./server/database.js');
+var routes = require('./server/routes.js');
+var save = require('./server/saves.js');
 
 
 // paths
@@ -16,26 +18,33 @@ var admin = __dirname + '/public/admin';
 // settings
 app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({extended:true}));
 
 
-// get config
-database.select("SELECT * FROM config", function(data){
-    // get config from database
-    app.set('config', data[0]);
-    app.set('author', 'Jonathan Schell');
+// routes
+// gets
+app.get('*', function(req, res){
+
+    // filter admin or client
+    switch (req.url) {
+        case '/admin/':
+            routes.routes(req.url, res, admin);
+        break;
+        default:
+            routes.routes(req.url, res, client);
+    }
+
+})
+
+// posts
+app.post('/admin/save', function(req, res){
+
+    save.getSave(req.body);
+
 })
 
 
-app.get('/', function(req, res){
-
-    res.render(client + '/views/home', {
-        config : app.get('config'),
-        author : app.get('author')
-    });
-
-})
-
-
+// listen sever
 app.listen('3000', function(){
     console.log('Server run in http://localhost:3000');
 })
