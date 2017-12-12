@@ -28,6 +28,9 @@ exports.routes = function(req, res, path){
         case '/admin/':
             adminHome(res, path);
         break;
+        case '/admin/sections':
+            adminSections(res, path);
+        break;
 
     }
 
@@ -46,6 +49,16 @@ function clientHome(res, path){
 function adminHome(res, path){
     console.log('Admin Home');
     res.render(path + '/views/home', {
-        admin : 'soy admin'
+        config : app.get('config'),
+        author : app.get('author')
+    });
+}
+
+
+function adminSections(res, path){
+    console.log('Admin Sections');
+    res.render(path + '/views/sections', {
+        config : app.get('config'),
+        author : app.get('author')
     });
 }

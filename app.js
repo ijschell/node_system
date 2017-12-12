@@ -3,16 +3,29 @@ var http = require('http');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-
-
-// extra modules
-var routes = require('./server/routes.js');
-var save = require('./server/saves.js');
+var multer  = require('multer');
 
 
 // paths
 var client = __dirname + '/public/client';
 var admin = __dirname + '/public/admin';
+
+
+// extra modules
+var routes = require('./server/routes.js');
+var save = require('./server/saves.js');
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, admin + '/files/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+var upload = multer({
+    storage : storage,
+    limits : { fileSize : '4mb' }
+});
 
 
 // settings
@@ -30,6 +43,9 @@ app.get('*', function(req, res){
         case '/admin/':
             routes.routes(req.url, res, admin);
         break;
+        case '/admin/sections':
+            routes.routes(req.url, res, admin);
+        break;
         default:
             routes.routes(req.url, res, client);
     }
@@ -37,9 +53,23 @@ app.get('*', function(req, res){
 })
 
 // posts
-app.post('/admin/save', function(req, res){
+app.post('/admin/save', upload.array('image', 12), function(req, res){
 
-    save.getSave(req.body);
+    // if has image?
+    if(req.files != undefined){
+
+        var data = {
+            body : req.body,
+            image : req.files,
+            section : req.body.section
+        }
+        save.getSave(data, res, admin);
+
+    }else {
+
+        save.getSave(req.body, res, admin);
+
+    }
 
 })
 

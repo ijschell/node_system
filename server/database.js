@@ -1,18 +1,19 @@
 var mysql = require('mysql');
 
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "node_system"
+var con = mysql.createPool({
+    connectionLimit : 10,
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "node_system"
 });
 
 var actionDatabase = function(callback){
-    con.connect(function(err) {
-      if (err) throw err;
+    // con.connect(function(err) {
+    //   if (err) throw err;
       // connected!
       callback();
-    });
+    // });
 }
 
 exports.insert = function(sql, callback){

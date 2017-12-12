@@ -1,0 +1,25 @@
+include head.jade
+
+h1 #{admin}
+
+div#newSection
+    h2 Agregar nueva sección
+        div
+            form(action="save" method="post" encType="multipart/form-data")
+                input(type="hidden" name="section" value="sections-new")
+                label Título
+                input(type="text" name="title")
+                br
+                label Descripción
+                input(type="text" name="description")
+                br
+                label Imagen
+                input(type="file" name="image" accept=".jpg, .jpeg, .png")
+                br
+                input(type="submit" value="Guardar")
+    
+div#contentSections
+    
+
+include sidebar.jade
+include footer.jade
