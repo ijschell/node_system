@@ -52,8 +52,17 @@ app.get('*', function(req, res){
 
 })
 
-// posts
-app.post('/admin/save', upload.array('image', 12), function(req, res){
+
+// save config
+app.post('/admin', upload.array('image', 12), function(req, res){
+
+    save.getSave(req.body, res, admin);
+
+})
+
+
+// save sections and delete
+app.post('/admin/sections', upload.array('image', 12), function(req, res){
 
     // if has image?
     if(req.files != undefined){

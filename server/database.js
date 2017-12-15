@@ -9,11 +9,7 @@ var con = mysql.createPool({
 });
 
 var actionDatabase = function(callback){
-    // con.connect(function(err) {
-    //   if (err) throw err;
-      // connected!
       callback();
-    // });
 }
 
 exports.insert = function(sql, callback){
@@ -29,6 +25,15 @@ exports.select = function(sql, callback){
     actionDatabase(function(){
         con.query(sql, function (err, result, fields) {
         if (err) throw err;
+            callback(result);
+        });
+    });
+}
+
+exports.delete = function(sql, callback){
+    actionDatabase(function(){
+        con.query(sql, function (err, result) {
+            if (err) throw err;
             callback(result);
         });
     });

@@ -57,8 +57,15 @@ function adminHome(res, path){
 
 function adminSections(res, path){
     console.log('Admin Sections');
-    res.render(path + '/views/sections', {
-        config : app.get('config'),
-        author : app.get('author')
-    });
+    let sections;
+    // get sections saves
+    database.select("SELECT * FROM sections", function(data){
+        // get config from database
+        sections = data;
+        res.render(path + '/views/sections', {
+            config : app.get('config'),
+            author : app.get('author'),
+            sections : sections
+        });
+    })
 }
