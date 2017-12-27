@@ -76,6 +76,14 @@ exports.getSave = function(req, res, path){
 
             });
         break;
+        case 'contact':
+
+            database.update("UPDATE contact SET name = '"+req.name+"', phone = '"+req.phone+"', mail = '"+req.mail+"' WHERE 1", function(data){
+                console.log('Contacto actualizado!');
+                routes.routes('/admin/contact', res, path);
+            });
+
+        break;
         default:
 
     }

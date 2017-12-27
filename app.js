@@ -46,6 +46,9 @@ app.get('*', function(req, res){
         case '/admin/sections':
             routes.routes(req.url, res, admin);
         break;
+        case '/admin/contact':
+            routes.routes(req.url, res, admin);
+        break;
         default:
             routes.routes(req.url, res, client);
     }
@@ -79,6 +82,13 @@ app.post('/admin/sections', upload.array('image', 12), function(req, res){
         save.getSave(req.body, res, admin);
 
     }
+
+})
+
+//save contact data
+app.post('/admin/contact', upload.array('image', 12), function(req, res){
+
+    save.getSave(req.body, res, admin);
 
 })
 

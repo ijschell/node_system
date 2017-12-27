@@ -31,6 +31,9 @@ exports.routes = function(req, res, path){
         case '/admin/sections':
             adminSections(res, path);
         break;
+        case '/admin/contact':
+            adminContact(res, path);
+        break;
 
     }
 
@@ -57,7 +60,7 @@ function adminHome(res, path){
 
 function adminSections(res, path){
     console.log('Admin Sections');
-    let sections;
+    var sections;
     // get sections saves
     database.select("SELECT * FROM sections", function(data){
         // get config from database
@@ -66,6 +69,22 @@ function adminSections(res, path){
             config : app.get('config'),
             author : app.get('author'),
             sections : sections
+        });
+    })
+}
+
+
+function adminContact(res, path){
+    console.log('Admin Contact');
+    var contactData;
+    // get contact data
+    database.select("SELECT * FROM contact", function(data){
+        // get config from database
+        contactData = data;
+        res.render(path + '/views/contact', {
+            config : app.get('config'),
+            author : app.get('author'),
+            contact_data : contactData
         });
     })
 }
