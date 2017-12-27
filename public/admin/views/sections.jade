@@ -25,11 +25,30 @@ div#contentSections
     div.inner
         each section, i in sections
             div(class="section id_" + section.id)
-                img(src="../admin/files/" + section.image data-name=section.image)
-                h3 #{section.title}
-                p.description #{section.description}
-                div.actions
-                    a(class="remove" data-target=section.id) del
+                div.view_content
+                    img(src="../admin/files/" + section.image data-name=section.image)
+                    h3 #{section.title}
+                    p.description #{section.description}
+                    div.actions
+                        a(class="remove" data-target=section.id) del - 
+                        a(class="edit" data-target=section.id) edit
+                div.editing_content
+                    form(action="" method="post" encType="multipart/form-data")
+                        input(type="hidden" name="section" value="sections-edit")
+                        input(type="hidden" name="id" value="#{section.id}")
+                        input(type="hidden" name="old_image" value="#{section.image}")
+                        img(src="../admin/files/" + section.image data-name=section.image)
+                        label Título
+                        input(type="text" name="title" value="#{section.title}")
+                        br
+                        label Descripción
+                        input(type="text" name="description" value="#{section.description}")
+                        br
+                        label Imagen
+                        input(type="file" name="image" accept=".jpg, .jpeg, .png")
+                        br
+                        input(type="submit" value="Guardar")
+                    
     
 
 include sidebar.jade

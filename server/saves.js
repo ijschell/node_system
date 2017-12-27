@@ -21,7 +21,7 @@ exports.getSave = function(req, res, path){
         break;
         case 'sections-new':
 
-            let image;
+            var image;
 
             if(req.image.length > 0){
                 image = req.image[0].originalname;
@@ -31,6 +31,30 @@ exports.getSave = function(req, res, path){
 
             database.insert("INSERT INTO sections (title, description, image) VALUES ('"+req.body.title+"', '"+req.body.description+"', '"+image+"')", function(data){
                 console.log('Nueva sección creada!');
+                routes.routes('/admin/sections', res, path);
+            });
+
+        break;
+        case 'sections-edit':
+
+            // delete old image
+            if(req.body.old_image.length > 0){
+                fs.unlink(path + '/files/' + req.body.old_image, function(err){
+                    if(err) return console.log(err);
+                });
+            }
+
+            // Edit to new image
+            var image;
+
+            if(req.image.length > 0){
+                image = req.image[0].originalname;
+            }else {
+                image = '';
+            }
+
+            database.update("UPDATE sections SET image = '"+image+"', title = '"+req.body.title+"', description = '"+req.body.description+"' WHERE id = '"+req.body.id+"'", function(data){
+                console.log('Sección editada!');
                 routes.routes('/admin/sections', res, path);
             });
 

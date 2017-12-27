@@ -38,3 +38,12 @@ exports.delete = function(sql, callback){
         });
     });
 }
+
+exports.update = function(sql, callback){
+    actionDatabase(function(){
+        con.query(sql, function (err, result) {
+            if (err) throw err;
+            callback(result);
+        });
+    });
+}

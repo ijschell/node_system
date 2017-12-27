@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AASQ,0CAAgB;EACZ,OAAO,EAAE,IAAI",
+"sources": ["../scss/_sections.scss"],
+"names": [],
+"file": "master.css"
+}

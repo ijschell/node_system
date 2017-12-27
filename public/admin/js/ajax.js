@@ -6,7 +6,7 @@ $(document).ready(function(){
 $(document).on('click', '#contentSections .actions .remove', function(e){
     e.preventDefault();
     var target = $(this).attr('data-target');
-    var image = $(this).parents('.id_' + target).children('img').attr('data-name');
+    var image = $(this).parents('.view_content').children('img').attr('data-name');
     console.log(image);
     $.ajax({
         url: '/admin/sections',
