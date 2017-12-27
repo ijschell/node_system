@@ -37,6 +37,9 @@ exports.routes = function(req, res, path){
         case '/admin/perfil':
             adminPerfil(res, path);
         break;
+        case '/admin/login':
+            adminLogin(res, path);
+        break;
 
     }
 
@@ -54,9 +57,17 @@ function clientHome(res, path){
 
 function adminHome(res, path){
     console.log('Admin Home');
+
+    if (res.token.length > 0) {
+        var token = res.token;
+    }else {
+        var token = '';
+    }
+
     res.render(path + '/views/home', {
         config : app.get('config'),
-        author : app.get('author')
+        author : app.get('author'),
+        token : token
     });
 }
 
@@ -97,6 +108,17 @@ function adminPerfil(res, path){
     console.log('Admin Perfil');
 
     res.render(path + '/views/perfil', {
+        config : app.get('config'),
+        author : app.get('author')
+    });
+
+}
+
+
+function adminLogin(res, path){
+    console.log('Admin Login');
+
+    res.render(path + '/views/login', {
         config : app.get('config'),
         author : app.get('author')
     });

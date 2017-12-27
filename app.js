@@ -4,6 +4,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var multer  = require('multer');
+var auth = require('./server/auth.js');
 
 
 // paths
@@ -39,6 +40,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.get('*', function(req, res){
 
     // filter admin or client
+
     switch (req.url) {
         case '/admin/':
             routes.routes(req.url, res, admin);
@@ -50,6 +52,9 @@ app.get('*', function(req, res){
             routes.routes(req.url, res, admin);
         break;
         case '/admin/perfil':
+            routes.routes(req.url, res, admin);
+        break;
+        case '/admin/login':
             routes.routes(req.url, res, admin);
         break;
         default:
@@ -99,6 +104,13 @@ app.post('/admin/contact', upload.array('image', 12), function(req, res){
 app.post('/admin/perfil', upload.array('image', 12), function(req, res){
 
     save.getSave(req.body, res, admin);
+
+})
+
+//Login
+app.post('/admin/login', upload.array('image', 12), function(req, res){
+
+    auth.login(req.body, res, admin);
 
 })
 

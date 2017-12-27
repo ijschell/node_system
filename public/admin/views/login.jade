@@ -1,0 +1,19 @@
+include head.jade
+
+h2 Login
+
+div#loginSection    
+        div
+            form(action="" method="post" encType="multipart/form-data")
+                input(type="hidden" name="section" value="login")
+                label Usuario
+                input(type="text" name="user")
+                br
+                label Contraseña
+                input(type="password" name="pass")
+                p(class="msj error")
+                br
+                input(type="submit" value="Entrar")
+
+include sidebar.jade
+include footer.jade
