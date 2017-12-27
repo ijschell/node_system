@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2017 at 04:25 PM
+-- Generation Time: Dec 27, 2017 at 07:19 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -58,7 +58,25 @@ CREATE TABLE `contact` (
 --
 
 INSERT INTO `contact` (`name`, `phone`, `mail`) VALUES
-('Jona', '096828107', 'jona@jona.com');
+('asd', 'asad', 'asdas');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `perfil`
+--
+
+CREATE TABLE `perfil` (
+  `user` varchar(50) COLLATE utf8_bin NOT NULL,
+  `pass` varchar(32) COLLATE utf8_bin NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `perfil`
+--
+
+INSERT INTO `perfil` (`user`, `pass`) VALUES
+('Jona', '78842815248300fa6ae79f7776a5080a');
 
 -- --------------------------------------------------------
 
@@ -102,7 +120,7 @@ ALTER TABLE `config`
 -- AUTO_INCREMENT for table `sections`
 --
 ALTER TABLE `sections`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

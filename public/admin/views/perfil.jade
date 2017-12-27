@@ -1,0 +1,20 @@
+include head.jade
+
+
+h2 Perfil
+div#perfilSection    
+        div
+            form(action="" method="post" encType="multipart/form-data")
+                input(type="hidden" name="section" value="perfil")
+                label Nueva Contraseña
+                input(type="password" name="pass_confirmation" data-validation="length" data-validation-length="min8")
+                br
+                label Repite Contraseña
+                input(type="password" name="pass")
+                p(class="msj error")
+                br
+                input(type="submit" value="Guardar")
+
+
+include sidebar.jade    
+include footer.jade

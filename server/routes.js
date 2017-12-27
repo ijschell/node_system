@@ -34,6 +34,9 @@ exports.routes = function(req, res, path){
         case '/admin/contact':
             adminContact(res, path);
         break;
+        case '/admin/perfil':
+            adminPerfil(res, path);
+        break;
 
     }
 
@@ -87,4 +90,15 @@ function adminContact(res, path){
             contact_data : contactData
         });
     })
+}
+
+
+function adminPerfil(res, path){
+    console.log('Admin Perfil');
+
+    res.render(path + '/views/perfil', {
+        config : app.get('config'),
+        author : app.get('author')
+    });
+
 }

@@ -2,6 +2,7 @@
 var express = require('express');
 var app = express();
 var fs = require('fs');
+var md5 = require('md5');
 
 
 // extra modules
@@ -81,6 +82,14 @@ exports.getSave = function(req, res, path){
             database.update("UPDATE contact SET name = '"+req.name+"', phone = '"+req.phone+"', mail = '"+req.mail+"' WHERE 1", function(data){
                 console.log('Contacto actualizado!');
                 routes.routes('/admin/contact', res, path);
+            });
+
+        break;
+        case 'perfil':
+
+            database.update("UPDATE perfil SET pass = '"+md5(req.pass_confirmation)+"' WHERE 1", function(data){
+                console.log('Perfil actualizado!');
+                routes.routes('/admin/perfil', res, path);
             });
 
         break;
