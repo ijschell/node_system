@@ -39,25 +39,43 @@ app.use(bodyParser.urlencoded({extended:true}));
 // gets
 app.get('*', function(req, res){
 
-    // filter admin or client
-    switch (req.path) {
-        case '/admin/':
-            routes.routes('/admin/', res, admin);
-        break;
-        case '/admin/sections':
-            routes.routes('/admin/sections', res, admin);
-        break;
-        case '/admin/contact':
-            routes.routes('/admin/contact', res, admin);
-        break;
-        case '/admin/perfil':
-            routes.routes('/admin/perfil', res, admin);
-        break;
-        case '/admin/login':
-            routes.routes('/admin/login', res, admin);
-        break;
-        // default:
-        //     routes.routes(req.url, res, client);
+    console.log(req.headers)
+
+    if(req.path != '/admin/login'){
+
+        var logged = middleware.ensureAuthenticated(req, res);
+
+        console.log(logged)
+
+        if(logged != false){
+            // filter admin or client
+            switch (req.path) {
+                case '/admin/':
+                    routes.routes('/admin/', res, admin);
+                break;
+                case '/admin/sections':
+                    routes.routes('/admin/sections', res, admin);
+                break;
+                case '/admin/contact':
+                    routes.routes('/admin/contact', res, admin);
+                break;
+                case '/admin/perfil':
+                    routes.routes('/admin/perfil', res, admin);
+                break;
+                // default:
+                //     routes.routes(req.url, res, client);
+            }
+
+        }else {
+
+            res.redirect(301, '/admin/login');
+
+        }
+
+    }else {
+
+        routes.routes('/admin/login', res, admin);
+
     }
 
 })
@@ -113,11 +131,13 @@ app.post('/admin/login', upload.array('image', 12), function(req, res){
 
 })
 
-//get token
-app.post('/admin/token', upload.array('image', 12), function(req, res){
 
-    middleware.ensureAuthenticated(req, res, admin);
-    // auth.login(req, res, admin);
+// get headers
+app.post('/admin/auth', upload.array('image', 12), function(req, res){
+    
+    console.log(req.headers)
+    // auth.login(req.body, res, admin);
+
 })
 
 // listen sever

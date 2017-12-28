@@ -4,6 +4,7 @@ var moment = require('moment');
 var secret = require('./secret_token.js');
 var md5 = require('md5');
 var routes = require('./routes.js');
+var url = require('url');
 
 
 var createToken = function(callback) {
@@ -33,9 +34,10 @@ exports.login = function(user, res, admin){
             createToken(function(data){
 
                 res.token = data;
+                res.setHeader('authorization', 'Bearer ' + data)
 
                 routes.routes('/admin/', res, admin);
-                
+
             });
 
 

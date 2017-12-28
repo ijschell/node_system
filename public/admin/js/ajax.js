@@ -23,12 +23,12 @@ $(document).on('click', '#contentSections .actions .remove', function(e){
 })
 
 
-function checkAuth(){
+function checkAuth(token){
 
     // if($('body').attr('data-token') != ''){
         $.ajax({
             headers: {
-                'authorization': 'Bearer ' + $('body').attr('data-token')
+                'authorization': 'Bearer ' + token
             },
             url: '/admin/token',
             method: 'post',
@@ -37,5 +37,5 @@ function checkAuth(){
             }
         });
     // }
-    
+
 }
