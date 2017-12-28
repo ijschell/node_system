@@ -4,8 +4,46 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var multer  = require('multer');
-var auth = require('./server/auth.js');
-var middleware = require('./server/middleware.js');
+var flash = require('connect-flash');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
+var secret_token = require('./server/secret_token.js');
+var passport = require('passport'),LocalStrategy = require('passport-local').Strategy;
+
+// middelwares config
+app.use(cookieParser());
+app.use(session({
+    secret: secret_token.secret_token,
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(flash());
+passport.use(new LocalStrategy(
+
+  function(username, password, done) {
+
+    User.findOne({ username: username }, function (err, user) {
+
+      if (err) { return done(err); }
+
+      if (!user) {
+
+        return done(null, false, { message: 'Incorrect username.' });
+
+      }
+
+      if (!user.validPassword(password)) {
+
+        return done(null, false, { message: 'Incorrect password.' });
+
+      }
+      console.log(user);
+      return done(null, user);
+
+    });
+  }
+));
+
 
 // paths
 var client = __dirname + '/public/client';
@@ -39,43 +77,24 @@ app.use(bodyParser.urlencoded({extended:true}));
 // gets
 app.get('*', function(req, res){
 
-    console.log(req.headers)
-
-    if(req.path != '/admin/login'){
-
-        var logged = middleware.ensureAuthenticated(req, res);
-
-        console.log(logged)
-
-        if(logged != false){
-            // filter admin or client
-            switch (req.path) {
-                case '/admin/':
-                    routes.routes('/admin/', res, admin);
-                break;
-                case '/admin/sections':
-                    routes.routes('/admin/sections', res, admin);
-                break;
-                case '/admin/contact':
-                    routes.routes('/admin/contact', res, admin);
-                break;
-                case '/admin/perfil':
-                    routes.routes('/admin/perfil', res, admin);
-                break;
-                // default:
-                //     routes.routes(req.url, res, client);
-            }
-
-        }else {
-
-            res.redirect(301, '/admin/login');
-
-        }
-
-    }else {
-
-        routes.routes('/admin/login', res, admin);
-
+    switch (req.path) {
+        case '/admin/':
+            routes.routes('/admin/', res, admin);
+        break;
+        case '/admin/sections':
+            routes.routes('/admin/sections', res, admin);
+        break;
+        case '/admin/contact':
+            routes.routes('/admin/contact', res, admin);
+        break;
+        case '/admin/perfil':
+            routes.routes('/admin/perfil', res, admin);
+        break;
+        case '/admin/login':
+            routes.routes('/admin/login', res, admin);
+        break;
+        // default:
+        //     routes.routes(req.url, res, client);
     }
 
 })
@@ -125,20 +144,14 @@ app.post('/admin/perfil', upload.array('image', 12), function(req, res){
 })
 
 //Login
-app.post('/admin/login', upload.array('image', 12), function(req, res){
+app.post('/admin/login',  passport.authenticate('local', {
 
-    auth.login(req.body, res, admin);
+    successRedirect : '/admin',
+    failureRedirect : '/admin/login',
+    failureFlash : 'Invalid username or password'
 
-})
+}))
 
-
-// get headers
-app.post('/admin/auth', upload.array('image', 12), function(req, res){
-    
-    console.log(req.headers)
-    // auth.login(req.body, res, admin);
-
-})
 
 // listen sever
 app.listen('3000', function(){

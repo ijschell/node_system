@@ -1,7 +1,8 @@
 include head.jade
 
 
-h1 #{token}
+if token.length > 0
+    h1 #{token}
 
 form(action="save" method="post")
     input(type="hidden" name="section" value="config")
