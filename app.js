@@ -5,7 +5,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var multer  = require('multer');
 var auth = require('./server/auth.js');
-
+var middleware = require('./server/middleware.js');
 
 // paths
 var client = __dirname + '/public/client';
@@ -40,25 +40,24 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.get('*', function(req, res){
 
     // filter admin or client
-
-    switch (req.url) {
+    switch (req.path) {
         case '/admin/':
-            routes.routes(req.url, res, admin);
+            routes.routes('/admin/', res, admin);
         break;
         case '/admin/sections':
-            routes.routes(req.url, res, admin);
+            routes.routes('/admin/sections', res, admin);
         break;
         case '/admin/contact':
-            routes.routes(req.url, res, admin);
+            routes.routes('/admin/contact', res, admin);
         break;
         case '/admin/perfil':
-            routes.routes(req.url, res, admin);
+            routes.routes('/admin/perfil', res, admin);
         break;
         case '/admin/login':
-            routes.routes(req.url, res, admin);
+            routes.routes('/admin/login', res, admin);
         break;
-        default:
-            routes.routes(req.url, res, client);
+        // default:
+        //     routes.routes(req.url, res, client);
     }
 
 })
@@ -114,6 +113,12 @@ app.post('/admin/login', upload.array('image', 12), function(req, res){
 
 })
 
+//get token
+app.post('/admin/token', upload.array('image', 12), function(req, res){
+
+    middleware.ensureAuthenticated(req, res, admin);
+    // auth.login(req, res, admin);
+})
 
 // listen sever
 app.listen('3000', function(){

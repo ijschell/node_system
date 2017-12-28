@@ -6,23 +6,24 @@ var md5 = require('md5');
 var routes = require('./routes.js');
 
 
-var createToken = function(callback){
+var createToken = function(callback) {
 
-    database.select("SELECT * FROM perfil", function(data){
+    database.select("SELECT user FROM perfil", function(data){
 
         var payload = {
-            sub: data[0].user,
-            iat: moment().unix(),
-            exp: moment().add(14, 'days').unix(),
-        }
+          sub: data,
+          iat: moment().unix(),
+          exp: moment().add(14, "days").unix(),
+        };
 
         callback(jwt.encode(payload, secret.secret_token));
 
     })
 
-}
+};
 
 
+// login and create token
 exports.login = function(user, res, admin){
 
     database.select("SELECT * FROM perfil", function(data){
@@ -34,8 +35,9 @@ exports.login = function(user, res, admin){
                 res.token = data;
 
                 routes.routes('/admin/', res, admin);
-
+                
             });
+
 
         }else {
             console.log('error!')

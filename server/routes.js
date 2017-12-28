@@ -58,7 +58,7 @@ function clientHome(res, path){
 function adminHome(res, path){
     console.log('Admin Home');
 
-    if (res.token.length > 0) {
+    if (res.token != undefined) {
         var token = res.token;
     }else {
         var token = '';
