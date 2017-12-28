@@ -4,45 +4,6 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var multer  = require('multer');
-var flash = require('connect-flash');
-var session = require('express-session');
-var cookieParser = require('cookie-parser');
-var secret_token = require('./server/secret_token.js');
-var passport = require('passport'),LocalStrategy = require('passport-local').Strategy;
-
-// middelwares config
-app.use(cookieParser());
-app.use(session({
-    secret: secret_token.secret_token,
-    resave: false,
-    saveUninitialized: false
-}));
-app.use(flash());
-passport.use(new LocalStrategy(
-
-  function(username, password, done) {
-
-    User.findOne({ username: username }, function (err, user) {
-
-      if (err) { return done(err); }
-
-      if (!user) {
-
-        return done(null, false, { message: 'Incorrect username.' });
-
-      }
-
-      if (!user.validPassword(password)) {
-
-        return done(null, false, { message: 'Incorrect password.' });
-
-      }
-      console.log(user);
-      return done(null, user);
-
-    });
-  }
-));
 
 
 // paths
@@ -142,15 +103,6 @@ app.post('/admin/perfil', upload.array('image', 12), function(req, res){
     save.getSave(req.body, res, admin);
 
 })
-
-//Login
-app.post('/admin/login',  passport.authenticate('local', {
-
-    successRedirect : '/admin',
-    failureRedirect : '/admin/login',
-    failureFlash : 'Invalid username or password'
-
-}))
 
 
 // listen sever
