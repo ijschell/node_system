@@ -5,7 +5,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var multer  = require('multer');
 var auth = require('./server/auth.js');
-var middleware = require('./server/middleware.js');
+var cookieParser = require('cookie-parser');
 
 // paths
 var client = __dirname + '/public/client';
@@ -33,50 +33,39 @@ var upload = multer({
 app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended:true}));
-
+app.use(cookieParser());
 
 // routes
 // gets
 app.get('*', function(req, res){
 
-    console.log(req.headers)
+    auth.checkAuth(req.cookies.Authorization, res, admin, function(data){
 
-    if(req.path != '/admin/login'){
 
-        var logged = middleware.ensureAuthenticated(req, res);
 
-        console.log(logged)
+    })
 
-        if(logged != false){
-            // filter admin or client
-            switch (req.path) {
-                case '/admin/':
-                    routes.routes('/admin/', res, admin);
-                break;
-                case '/admin/sections':
-                    routes.routes('/admin/sections', res, admin);
-                break;
-                case '/admin/contact':
-                    routes.routes('/admin/contact', res, admin);
-                break;
-                case '/admin/perfil':
-                    routes.routes('/admin/perfil', res, admin);
-                break;
-                // default:
-                //     routes.routes(req.url, res, client);
-            }
-
-        }else {
-
-            res.redirect(301, '/admin/login');
-
-        }
-
-    }else {
-
-        routes.routes('/admin/login', res, admin);
-
+    // filter admin or client
+    switch (req.path) {
+        case '/admin/':
+            routes.routes('/admin/', res, admin);
+        break;
+        case '/admin/sections':
+            routes.routes('/admin/sections', res, admin);
+        break;
+        case '/admin/contact':
+            routes.routes('/admin/contact', res, admin);
+        break;
+        case '/admin/perfil':
+            routes.routes('/admin/perfil', res, admin);
+        break;
+        case '/admin/login':
+            routes.routes('/admin/login', res, admin);
+        break;
+        // default:
+        //     routes.routes(req.url, res, client);
     }
+
 
 })
 
@@ -134,9 +123,9 @@ app.post('/admin/login', upload.array('image', 12), function(req, res){
 
 // get headers
 app.post('/admin/auth', upload.array('image', 12), function(req, res){
-    
-    console.log(req.headers)
-    // auth.login(req.body, res, admin);
+
+    // console.log(req.headers)
+    auth.login(req.body, res, admin);
 
 })
 
