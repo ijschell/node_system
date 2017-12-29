@@ -15,7 +15,7 @@ database.select("SELECT * FROM config", function(data){
 })
 
 
-exports.routes = function(req, res, path){
+exports.routes = function(req, res, path, message){
 
     switch (req) {
         // client paths
@@ -25,7 +25,7 @@ exports.routes = function(req, res, path){
 
 
         // admin paths
-        case '/admin/':
+        case '/admin/home':
             adminHome(res, path);
         break;
         case '/admin/sections':
@@ -38,7 +38,7 @@ exports.routes = function(req, res, path){
             adminPerfil(res, path);
         break;
         case '/admin/login':
-            adminLogin(res, path);
+            adminLogin(res, path, message);
         break;
 
     }
@@ -58,16 +58,9 @@ function clientHome(res, path){
 function adminHome(res, path){
     console.log('Admin Home');
 
-    if (res.token != undefined) {
-        var token = res.token;
-    }else {
-        var token = '';
-    }
-
     res.render(path + '/views/home', {
         config : app.get('config'),
-        author : app.get('author'),
-        token : token
+        author : app.get('author')
     });
 }
 
@@ -115,12 +108,13 @@ function adminPerfil(res, path){
 }
 
 
-function adminLogin(res, path){
+function adminLogin(res, path, message){
     console.log('Admin Login');
 
     res.render(path + '/views/login', {
         config : app.get('config'),
-        author : app.get('author')
+        author : app.get('author'),
+        message : message
     });
 
 }

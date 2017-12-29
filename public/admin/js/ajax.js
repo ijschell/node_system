@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    checkAuth();
+
 })
 
 
@@ -21,21 +21,3 @@ $(document).on('click', '#contentSections .actions .remove', function(e){
         }
     })
 })
-
-
-function checkAuth(token){
-
-    // if($('body').attr('data-token') != ''){
-    //     $.ajax({
-    //         headers: {
-    //             'authorization': 'Bearer ' + token
-    //         },
-    //         url: '/admin/token',
-    //         method: 'post',
-    //         success : function(data){
-    //             console.log(data);
-    //         }
-    //     });
-    // // }
-
-}

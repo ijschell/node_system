@@ -1,9 +1,6 @@
 include head.jade
 
-
-h1 #{token}
-
-form(action="save" method="post")
+form(action="/admin/home" method="post")
     input(type="hidden" name="section" value="config")
     label Título
     input(type="text" name="title")

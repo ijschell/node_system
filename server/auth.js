@@ -37,15 +37,21 @@ exports.login = function(user, res, admin){
 
             createToken(function(data){
 
+                // set cookie
+                res.cookie('Authorization' , data);
 
-                // // res.setHeader('Authorization', 'Bearer ' + data)
-                res.cookie('Authorization' , data).send('Authorization is set');
+                // send to home admin
+                routes.routes('/admin/home', res, admin);
 
             });
 
 
         }else {
+
             console.log('error!')
+
+            routes.routes('/admin/login', res, admin, 'Datos inválidos');
+
         }
 
     })
@@ -63,11 +69,12 @@ exports.checkAuth = function(token, res, admin, callback){
 
         if(userAuth == data[0].user){
 
-            console.log('permitido con éxito')
+            callback(true);
 
         }else {
 
             console.log('token invalido')
+            callback(false);
 
         }
 

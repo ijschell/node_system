@@ -16,7 +16,7 @@ exports.getSave = function(req, res, path){
 
             database.insert("UPDATE config SET title = '"+req.title+"', description = '"+req.description+"', keywords = '"+req.keywords+"' WHERE id = '1'", function(data){
                 console.log('Update!');
-                routes.routes('/admin/', res, path);
+                routes.routes('/admin/home', res, path);
             });
 
         break;

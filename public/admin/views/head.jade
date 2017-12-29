@@ -8,11 +8,4 @@ html
     meta(name="author" content="#{author} - Admin")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     link(rel="stylesheet" href="css/master.css")
-    script(src="/libs/jquery-3.2.1.min.js" charset="utf-8")
-    script(src="/admin/js/ajax.js" charset="utf-8")
-    script(type="text/javascript")
-        | if('#{token}' != ''){
-        |  checkAuth('#{token}');
-        | }
-
-  body(data-token="#{token}")
+  body
