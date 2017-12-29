@@ -4,6 +4,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var multer  = require('multer');
+var login = require('./server/login.js');
 
 
 // paths
@@ -101,6 +102,14 @@ app.post('/admin/contact', upload.array('image', 12), function(req, res){
 app.post('/admin/perfil', upload.array('image', 12), function(req, res){
 
     save.getSave(req.body, res, admin);
+
+})
+
+
+// login
+app.post('/admin/login', upload.array('image', 12), function(req, res){
+
+    login.checkLogin(req.body, res, admin);
 
 })
 
