@@ -23,6 +23,7 @@ var storage = multer.diskStorage({
     cb(null, file.originalname)
   }
 })
+
 var upload = multer({
     storage : storage,
     limits : { fileSize : '4mb' }
@@ -33,30 +34,54 @@ var upload = multer({
 app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended:true}));
+app.set('logged', false);
 
 
 // routes
 // gets
 app.get('*', function(req, res){
 
-    switch (req.path) {
-        case '/admin/':
-            routes.routes('/admin/', res, admin);
-        break;
-        case '/admin/sections':
-            routes.routes('/admin/sections', res, admin);
-        break;
-        case '/admin/contact':
-            routes.routes('/admin/contact', res, admin);
-        break;
-        case '/admin/perfil':
-            routes.routes('/admin/perfil', res, admin);
-        break;
-        case '/admin/login':
-            routes.routes('/admin/login', res, admin);
-        break;
-        // default:
-        //     routes.routes(req.url, res, client);
+    console.log(app.set('logged'));
+
+    if(app.set('logged') == true){
+
+        switch (req.path) {
+            case '/admin/':
+                routes.routes('/admin/', res, admin);
+            break;
+            case '/admin/sections':
+                routes.routes('/admin/sections', res, admin);
+            break;
+            case '/admin/contact':
+                routes.routes('/admin/contact', res, admin);
+            break;
+            case '/admin/perfil':
+                routes.routes('/admin/perfil', res, admin);
+            break;
+            case '/admin/login':
+            console.log('etrna aca');
+                routes.routes('/admin/login', res, admin);
+            break;
+            // case '/admin/logout':
+            //     // set logged in tru
+            //     app.set('logged', false);
+            //     // redirect
+            //     res.redirect('/admin/login');
+            // break;
+        }
+
+    }else {
+
+        console.log('no tiene acceso');
+        res.render(admin + '/views/login', {
+            config : {
+                description : "Login Admin",
+                title : "Login Admin",
+                keywords : "Login Admin"
+            },
+            author : "Jonathan Schell"
+        });
+
     }
 
 })
@@ -108,8 +133,15 @@ app.post('/admin/perfil', upload.array('image', 12), function(req, res){
 
 // login
 app.post('/admin/login', upload.array('image', 12), function(req, res){
-
-    login.checkLogin(req.body, res, admin);
+    console.log('asdas');
+    // login.checkLogin(req, res, admin, function(){
+    //
+    //     // set logged in true
+    //     app.set('logged', true);
+    //     // redirect
+    //     res.redirect('/admin/');
+    //
+    // });
 
 })
 
