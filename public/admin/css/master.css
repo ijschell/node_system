@@ -1,3 +1,133 @@
+* {
+  padding: 0;
+  margin: 0; }
+
+#sidebar {
+  position: relative;
+  width: 100%;
+  height: 75px;
+  background: red; }
+
+/*
+ * Specific styles of signin component
+ */
+/*
+ * General styles
+ */
+body, html {
+  height: 100%; }
+
+#login_contain {
+  height: 100%;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(#6891a2, #0c6121);
+  /*
+   * Card component
+   */
+  /*
+   * Form styles
+   */ }
+  #login_contain #loginSection {
+    padding-top: 40px; }
+  #login_contain .card-container.card {
+    max-width: 350px;
+    padding: 0px 40px 40px 40px; }
+  #login_contain .btn {
+    font-weight: 700;
+    height: 36px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default; }
+  #login_contain .card {
+    background-color: #F7F7F7;
+    /* just in case there no content*/
+    padding: 20px 25px 30px;
+    margin: 0 auto 25px;
+    margin-top: 50px;
+    /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); }
+  #login_contain .profile-img-card {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%; }
+  #login_contain .profile-name-card {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px 0 0;
+    min-height: 1em; }
+  #login_contain .reauth-email {
+    display: block;
+    color: #404040;
+    line-height: 2;
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box; }
+  #login_contain .form-signin #inputEmail,
+  #login_contain .form-signin #inputPassword {
+    direction: ltr;
+    height: 44px;
+    font-size: 16px; }
+  #login_contain .form-signin input[type=email],
+  #login_contain .form-signin input[type=password],
+  #login_contain .form-signin input[type=text],
+  #login_contain .form-signin button {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+    z-index: 1;
+    position: relative;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box; }
+  #login_contain .form-signin .form-control:focus {
+    border-color: #6891a2;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #6891a2;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #6891a2; }
+  #login_contain .btn.btn-signin {
+    /*background-color: #4d90fe; */
+    background-color: #6891a2;
+    /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+    padding: 0px;
+    font-weight: 700;
+    font-size: 14px;
+    height: 36px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: none;
+    -o-transition: all 0.218s;
+    -moz-transition: all 0.218s;
+    -webkit-transition: all 0.218s;
+    transition: all 0.218s; }
+  #login_contain .btn.btn-signin:hover,
+  #login_contain .btn.btn-signin:active,
+  #login_contain .btn.btn-signin:focus {
+    background-color: #0c6121; }
+  #login_contain .forgot-password {
+    color: #6891a2; }
+  #login_contain .forgot-password:hover,
+  #login_contain .forgot-password:active,
+  #login_contain .forgot-password:focus {
+    color: #0c6121; }
+
 #contentSections .section .editing_content {
   display: none; }
 

@@ -1,22 +1,19 @@
 include head.jade
 
-h2 Login
+div#login_contain
 
-if message != undefined
-    p #{message}
-
-div#loginSection    
-        div
-            form(action="/admin/login" method="post" encType="multipart/form-data")
+    div#loginSection
+        if message != undefined
+            div(style="max-width: 350px; margin: 0 auto 40px auto")
+                div.alert.alert-danger #{message}
+        div.card.card-container
+            img#profile-img.profile-img-card(src='//ssl.gstatic.com/accounts/ui/avatar_2x.png')
+            p#profile-name.profile-name-card
+            form.form-signin(action="/admin/login" method="post" encType="multipart/form-data")
                 input(type="hidden" name="section" value="login")
-                label Usuario
-                input(type="text" name="user")
-                br
-                label Contraseña
-                input(type="password" name="pass")
-                p(class="msj error")
-                br
-                input(type="submit" value="Entrar")
+                span#reauth-email.reauth-email
+                input#inputEmail.form-control(type='text', placeholder='Usuario', name="user", required='', autofocus='')
+                input#inputPassword.form-control(type='password', placeholder='Contraseña', name="pass" required='')
+                button.btn.btn-lg.btn-primary.btn-block.btn-signin(type='submit') Entrar
 
-include sidebar.jade
 include footer.jade

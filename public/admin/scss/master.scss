@@ -1,7 +1,13 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
 @import "header";
 @import "footer";
 @import "sidebar";
 @import "home";
+@import "login";
 @import "sections";
 @import "contact";
 @import "perfil";

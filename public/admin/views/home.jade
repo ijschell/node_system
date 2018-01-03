@@ -1,4 +1,5 @@
 include head.jade
+include sidebar.jade
 
 form(action="/admin/home" method="post")
     input(type="hidden" name="section" value="config")
@@ -13,5 +14,4 @@ form(action="/admin/home" method="post")
     br
     input(type="submit" value="Guardar")
 
-include sidebar.jade
 include footer.jade
