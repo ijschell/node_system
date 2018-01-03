@@ -1,52 +1,54 @@
 include head.jade
 include sidebar.jade
+include header.jade
 
-//- add new section
-h2 Agregar nueva sección
-div#newSection    
-        div
-            form(action="/admin/sections" method="post" encType="multipart/form-data")
-                input(type="hidden" name="section" value="sections-new")
-                label Título
-                input(type="text" name="title")
-                br
-                label Descripción
-                input(type="text" name="description")
-                br
-                label Imagen
-                input(type="file" name="image" accept=".jpg, .jpeg, .png")
-                br
-                input(type="submit" value="Guardar")
+div#main_content
+    //- add new section
+    h2 Agregar nueva sección
+    div#newSection    
+            div
+                form(action="/admin/sections" method="post" encType="multipart/form-data")
+                    input(type="hidden" name="section" value="sections-new")
+                    label Título
+                    input(type="text" name="title")
+                    br
+                    label Descripción
+                    input(type="text" name="description")
+                    br
+                    label Imagen
+                    input(type="file" name="image" accept=".jpg, .jpeg, .png")
+                    br
+                    input(type="submit" value="Guardar")
 
 
-//- print all sections
-h2 Tus secciones actuales
-div#contentSections
-    div.inner
-        each section, i in sections
-            div(class="section id_" + section.id)
-                div.view_content
-                    img(src="../admin/files/" + section.image data-name=section.image)
-                    h3 #{section.title}
-                    p.description #{section.description}
-                    div.actions
-                        a(class="remove" data-target=section.id) del - 
-                        a(class="edit" data-target=section.id) edit
-                div.editing_content
-                    form(action="/admin/sections" method="post" encType="multipart/form-data")
-                        input(type="hidden" name="section" value="sections-edit")
-                        input(type="hidden" name="id" value="#{section.id}")
-                        input(type="hidden" name="old_image" value="#{section.image}")
+    //- print all sections
+    h2 Tus secciones actuales
+    div#contentSections
+        div.inner
+            each section, i in sections
+                div(class="section id_" + section.id)
+                    div.view_content
                         img(src="../admin/files/" + section.image data-name=section.image)
-                        label Título
-                        input(type="text" name="title" value="#{section.title}")
-                        br
-                        label Descripción
-                        input(type="text" name="description" value="#{section.description}")
-                        br
-                        label Imagen
-                        input(type="file" name="image" accept=".jpg, .jpeg, .png")
-                        br
-                        input(type="submit" value="Guardar")
+                        h3 #{section.title}
+                        p.description #{section.description}
+                        div.actions
+                            a(class="remove" data-target=section.id) del - 
+                            a(class="edit" data-target=section.id) edit
+                    div.editing_content
+                        form(action="/admin/sections" method="post" encType="multipart/form-data")
+                            input(type="hidden" name="section" value="sections-edit")
+                            input(type="hidden" name="id" value="#{section.id}")
+                            input(type="hidden" name="old_image" value="#{section.image}")
+                            img(src="../admin/files/" + section.image data-name=section.image)
+                            label Título
+                            input(type="text" name="title" value="#{section.title}")
+                            br
+                            label Descripción
+                            input(type="text" name="description" value="#{section.description}")
+                            br
+                            label Imagen
+                            input(type="file" name="image" accept=".jpg, .jpeg, .png")
+                            br
+                            input(type="submit" value="Guardar")
 
 include footer.jade

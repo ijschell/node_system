@@ -1,0 +1,11 @@
+body{
+    background: #ECF1F5;
+}
+#main_content{
+    width: calc(100% - 300px);
+    position: absolute;
+    top: 70px;
+    left: 300px;
+    overflow-y: auto;
+    padding: 30px;
+}

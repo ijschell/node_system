@@ -1,20 +1,22 @@
 include head.jade
 include sidebar.jade
+include header.jade
 
-h2 Contacto
-div#contactSection    
-        div
-            form(action="/admin/contact" method="post" encType="multipart/form-data")
-                input(type="hidden" name="section" value="contact")
-                label Nombre
-                input(type="text" name="name" placeholder="#{contact_data[0].name}")
-                br
-                label Teléfono
-                input(type="text" name="phone" placeholder="#{contact_data[0].phone}")
-                br
-                label Mail
-                input(type="text" data-validation="email" name="mail" placeholder="#{contact_data[0].mail}")
-                br
-                input(type="submit" value="Guardar")
+div#main_content
+    h2 Contacto
+    div#contactSection    
+            div
+                form(action="/admin/contact" method="post" encType="multipart/form-data")
+                    input(type="hidden" name="section" value="contact")
+                    label Nombre
+                    input(type="text" name="name" placeholder="#{contact_data[0].name}")
+                    br
+                    label Teléfono
+                    input(type="text" name="phone" placeholder="#{contact_data[0].phone}")
+                    br
+                    label Mail
+                    input(type="text" data-validation="email" name="mail" placeholder="#{contact_data[0].mail}")
+                    br
+                    input(type="submit" value="Guardar")
  
 include footer.jade

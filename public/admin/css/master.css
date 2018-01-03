@@ -2,11 +2,36 @@
   padding: 0;
   margin: 0; }
 
-#sidebar {
-  position: relative;
+#header {
+  position: fixed;
   width: 100%;
-  height: 75px;
-  background: red; }
+  background: #4D616C;
+  height: 70px;
+  top: 0;
+  left: 0; }
+
+#sidebar {
+  position: fixed;
+  width: 300px;
+  background: #4D616C;
+  height: calc(100% - 70px);
+  top: 70px;
+  left: 0; }
+  #sidebar .wrapper ul li a {
+    color: #fff;
+    padding: 14px 25px;
+    background: transparent;
+    display: block;
+    font-size: 17px;
+    line-height: 46px; }
+    #sidebar .wrapper ul li a i {
+      position: relative;
+      font-size: 30px;
+      margin-right: 25px;
+      top: 8px; }
+    #sidebar .wrapper ul li a:hover {
+      text-decoration: none;
+      background: #4A5861; }
 
 /*
  * Specific styles of signin component
@@ -130,5 +155,16 @@ body, html {
 
 #contentSections .section .editing_content {
   display: none; }
+
+body {
+  background: #ECF1F5; }
+
+#main_content {
+  width: calc(100% - 300px);
+  position: absolute;
+  top: 70px;
+  left: 300px;
+  overflow-y: auto;
+  padding: 30px; }
 
 /*# sourceMappingURL=master.css.map */

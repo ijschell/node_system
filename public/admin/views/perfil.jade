@@ -1,18 +1,20 @@
 include head.jade
 include sidebar.jade
+include header.jade
 
-h2 Perfil
-div#perfilSection    
-        div
-            form(action="/admin/perfil" method="post" encType="multipart/form-data")
-                input(type="hidden" name="section" value="perfil")
-                label Nueva Contraseña
-                input(type="password" name="pass_confirmation" data-validation="length" data-validation-length="min8")
-                br
-                label Repite Contraseña
-                input(type="password" name="pass")
-                p(class="msj error")
-                br
-                input(type="submit" value="Guardar")
+div#main_content
+    h2 Perfil
+    div#perfilSection    
+            div
+                form(action="/admin/perfil" method="post" encType="multipart/form-data")
+                    input(type="hidden" name="section" value="perfil")
+                    label Nueva Contraseña
+                    input(type="password" name="pass_confirmation" data-validation="length" data-validation-length="min8")
+                    br
+                    label Repite Contraseña
+                    input(type="password" name="pass")
+                    p(class="msj error")
+                    br
+                    input(type="submit" value="Guardar")
   
 include footer.jade
