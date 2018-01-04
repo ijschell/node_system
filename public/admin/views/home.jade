@@ -3,17 +3,36 @@ include sidebar.jade
 include header.jade
 
 div#main_content
-    form(action="/admin/home" method="post")
-        input(type="hidden" name="section" value="config")
-        label Título
-        input(type="text" name="title")
-        br
-        label Descripción
-        input(type="text" name="description")
-        br
-        label Keywords
-        input(type="text" name="keywords")
-        br
-        input(type="submit" value="Guardar")
+    h2 Configuración del sitio.
+    div.description
+        p A continuación puede editar la información principal del sitio como el Título, Descripción y Keywords.
+        ul
+            li
+                span Un buen título SEO. 
+                br
+                | Un título es una frase que resume la idea general de un texto, una noticia, un post, un artículo, un reportaje… Y de todos los factores que influyen en el posicionamiento el título es uno de los más importantes.
+            li
+                span La meta descripción. 
+                br
+                | o meta description tag, es una etiqueta HTML que sirve para porporcionar una descripción del contenido de la página a los buscadores.
+            li
+                span Meta Keywords 
+                br
+                | permite resaltar palabras clave o frases clave que representan el contenido de la página web.
+        
+    form(action="" method="post")
+        div.container_fluid
+            div.row
+                div.col-md-4
+                    input(type="hidden" name="section" value="config")
+                    label Título
+                    input(type="text" name="title" placeholder="#{config.title}")
+                div.col-md-4
+                    label Descripción
+                    input(type="text" name="description" placeholder="#{config.description}")
+                div.col-md-4
+                    label Keywords
+                    input(type="text" name="keywords" placeholder="#{config.keywords}")
+                    input(type="submit" value="Guardar" class="confirm")
 
 include footer.jade

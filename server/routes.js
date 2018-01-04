@@ -8,14 +8,28 @@ var database = require('./database.js');
 
 
 // get config
-database.select("SELECT * FROM config", function(data){
+refreshConfig();
+// database.select("SELECT * FROM config", function(data){
     // get config from database
-    app.set('config', data[0]);
-    app.set('author', 'Jonathan Schell');
-})
+//     app.set('config', data[0]);
+//     app.set('author', 'Jonathan Schell');
+// })
+
+function refreshConfig(){
+
+    database.select("SELECT * FROM config", function(data){
+        // get config from database
+        app.set('config', data[0]);
+        app.set('author', 'Jonathan Schell');
+    })
+
+}
 
 
 exports.routes = function(req, res, path, message){
+
+    // refresh config
+    refreshConfig();
 
     switch (req) {
         // client paths
@@ -57,7 +71,6 @@ function clientHome(res, path){
 
 function adminHome(res, path){
     console.log('Admin Home');
-
     res.render(path + '/views/home', {
         config : app.get('config'),
         author : app.get('author')

@@ -13,8 +13,8 @@ var routes = require('./routes.js');
 exports.getSave = function(req, res, path){
     switch (req.section) {
         case 'config':
-
-            database.insert("UPDATE config SET title = '"+req.title+"', description = '"+req.description+"', keywords = '"+req.keywords+"' WHERE id = '1'", function(data){
+            console.log(req);
+            database.insert("UPDATE config SET title = '"+req.title+"', description = '"+req.description+"', keywords = '"+req.keywords+"' WHERE 1", function(data){
                 console.log('Update!');
                 routes.routes('/admin/home', res, path);
             });
