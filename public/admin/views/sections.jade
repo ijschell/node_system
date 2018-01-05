@@ -3,52 +3,65 @@ include sidebar.jade
 include header.jade
 
 div#main_content
-    //- add new section
     h2 Agregar nueva sección
-    div#newSection    
-            div
+    div.description
+        p Rellena los siguientes campos para crear una nueva sección.
+        div#newSection    
+            div.row
                 form(action="/admin/sections" method="post" encType="multipart/form-data")
-                    input(type="hidden" name="section" value="sections-new")
-                    label Título
-                    input(type="text" name="title")
-                    br
-                    label Descripción
-                    input(type="text" name="description")
-                    br
-                    label Imagen
-                    input(type="file" name="image" accept=".jpg, .jpeg, .png")
-                    br
-                    input(type="submit" value="Guardar")
+                    div.col-md-6
+                        input(type="hidden" name="section" value="sections-new")
+                        label Título
+                        input(type="text" name="title")
+                        label Imagen
+                        input(type="file" name="image" accept=".jpg, .jpeg, .png")
+                    div.col-md-6
+                        label Descripción
+                        textarea(name="description" id="editor")
+                        input(type="submit" value="Guardar" class="confirm")
+                    
+                    
+                        
 
 
     //- print all sections
-    h2 Tus secciones actuales
-    div#contentSections
-        div.inner
-            each section, i in sections
-                div(class="section id_" + section.id)
-                    div.view_content
-                        img(src="../admin/files/" + section.image data-name=section.image)
-                        h3 #{section.title}
-                        p.description #{section.description}
-                        div.actions
-                            a(class="remove" data-target=section.id) del - 
-                            a(class="edit" data-target=section.id) edit
-                    div.editing_content
-                        form(action="/admin/sections" method="post" encType="multipart/form-data")
-                            input(type="hidden" name="section" value="sections-edit")
-                            input(type="hidden" name="id" value="#{section.id}")
-                            input(type="hidden" name="old_image" value="#{section.image}")
-                            img(src="../admin/files/" + section.image data-name=section.image)
-                            label Título
-                            input(type="text" name="title" value="#{section.title}")
-                            br
-                            label Descripción
-                            input(type="text" name="description" value="#{section.description}")
-                            br
-                            label Imagen
-                            input(type="file" name="image" accept=".jpg, .jpeg, .png")
-                            br
-                            input(type="submit" value="Guardar")
+    if sections.length > 0
+        h2 Tus secciones actuales
+        div#contentSections
+            div.row
+                each section, i in sections
+                    div(class="col-md-4 section id_" + section.id)
+                        div.view_content
+                            if section.image.length > 0
+                                div.image(style="background-image: url(../admin/files/" + section.image data-name=section.image)")
+                            else
+                                div.image(style="background-image: url(../admin/files/sin_imagen.jpg")
+                            h3 #{section.title}
+                            div.content_description #{section.description}
+                            div.actions
+                                a(class="remove" data-target=section.id) Eliminar 
+                                a(class="edit" data-target=section.id) Editar
+                                div.clear
+                        div.editing_content.view_content
+                            form(action="/admin/sections" method="post" encType="multipart/form-data")
+                                input(type="hidden" name="section" value="sections-edit")
+                                input(type="hidden" name="id" value="#{section.id}")
+                                input(type="hidden" name="old_image" value="#{section.image}")
+                                if section.image.length > 0
+                                    div.image(style="background-image: url(../admin/files/" + section.image data-name=section.image)")
+                                else
+                                    div.image(style="background-image: url(../admin/files/sin_imagen.jpg")
+                                br
+                                label Imagen
+                                input(type="file" name="image" accept=".jpg, .jpeg, .png")
+                                br
+                                label Título
+                                input(type="text" name="title" value="#{section.title}")
+                                br
+                                label Descripción
+                                input(type="text" name="description" value="#{section.description}")                                
+                                br
+                                input(type="submit" value="Guardar" class="confirm")
+                                div.clear
 
 include footer.jade

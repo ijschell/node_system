@@ -3,6 +3,7 @@
     margin: 0;
 }
 
+@import "common";
 @import "header";
 @import "footer";
 @import "sidebar";
@@ -11,4 +12,3 @@
 @import "sections";
 @import "contact";
 @import "perfil";
-@import "common";

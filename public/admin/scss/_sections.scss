@@ -1,14 +1,39 @@
 #contentSections{
     .section{
+        padding: 10px;
         .view_content{
-            .actions{
-                .edit{
+            padding: 15px;
+            background: #fff;
+            .image{
+                background-size: cover;
+                background-position: center;
+                width: 100%;
+                height: 150px;
+            }
+            h3{
+                margin: 5px 0;
+                font-size: 20px;
+            }
+            .content_description{
 
+            }
+            .actions{
+                padding-top: 15px;
+                .edit{
+                    @include btnAlert;
+                }
+                .remove{
+                    @include btnDanger;
                 }
             }
         }
-        .editing_content{
-            display: none;
-        }
+    }
+    .editing_content{
+        display: none;
+    }
+}
+#newSection{
+    form{
+
     }
 }
