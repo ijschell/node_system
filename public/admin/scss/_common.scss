@@ -82,7 +82,7 @@ body{
     top: 70px;
     left: 300px;
     overflow-y: auto;
-    padding: 30px;
+    padding: 0 30px 30px 30px;
     .description{
         padding: 25px;
         border: solid 1px #ccc;
@@ -99,7 +99,7 @@ body{
             }
         }
     }
-    input[type="text"]{
+    input[type="text"], input[type="password"]{
         width: 100%;
         height: 35px;
         border: solid 1px #ccc;
@@ -113,4 +113,10 @@ body{
 }
 .clear{
     clear: both;
+}
+.msj.success{
+    color: #8ab140;
+}
+.msj.error{
+    color: #b14059;
 }

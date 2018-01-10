@@ -4,19 +4,22 @@ include header.jade
 
 div#main_content
     h2 Contacto
-    div#contactSection    
-            div
-                form(action="/admin/contact" method="post" encType="multipart/form-data")
+    div#contactSection
+        div.description
+            p A continuación puede editar la información que deseas mostrar a los visitantes del sitio web.
+            
+        div.row
+            form(action="/admin/contact" method="post" encType="multipart/form-data")
+                div.col-md-4
                     input(type="hidden" name="section" value="contact")
                     label Nombre
-                    input(type="text" name="name" placeholder="#{contact_data[0].name}")
-                    br
+                    input(type="text" name="name" placeholder="#{contact_data[0].phone}" value="#{contact_data[0].name}")
+                div.col-md-4
                     label Teléfono
-                    input(type="text" name="phone" placeholder="#{contact_data[0].phone}")
-                    br
+                    input(type="text" name="phone" placeholder="#{contact_data[0].phone}" value="#{contact_data[0].phone}")
+                div.col-md-4
                     label Mail
-                    input(type="text" data-validation="email" name="mail" placeholder="#{contact_data[0].mail}")
-                    br
-                    input(type="submit" value="Guardar")
+                    input(type="text" data-validation="email" name="mail" placeholder="#{contact_data[0].phone}" value="#{contact_data[0].mail}")
+                    input(type="submit" value="Guardar" class="confirm")
  
 include footer.jade

@@ -22,7 +22,10 @@
                         top: 8px;
                     }
                     &.active{
-
+                        background: #4A5861;
+                    }
+                    &:focus{
+                        text-decoration: none;
                     }
                     &:hover{
                         text-decoration: none;

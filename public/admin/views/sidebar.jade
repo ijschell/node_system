@@ -2,21 +2,41 @@ div#sidebar
     div.wrapper
         ul
             li
-                a(href="/admin/home")
-                    i.material-icons home
-                    | Home
+                if page == 'home'
+                    a(href="/admin/home").active
+                        i.material-icons home
+                        | Home
+                else                    
+                    a(href="/admin/home")    
+                        i.material-icons home
+                        | Home
             li
-                a(href="/admin/sections")
-                    i.material-icons extension
-                    | Secciones
+                if page == 'sections'
+                    a(href="/admin/sections").active
+                        i.material-icons extension
+                        | Secciones
+                else
+                    a(href="/admin/sections")
+                        i.material-icons extension
+                        | Secciones
             li
-                a(href="/admin/contact")
-                    i.material-icons perm_phone_msg
-                    | Contacto
+                if page == 'contact'
+                    a(href="/admin/contact").active
+                        i.material-icons perm_phone_msg
+                        | Contacto
+                else
+                    a(href="/admin/contact")
+                        i.material-icons perm_phone_msg
+                        | Contacto
             li
-                a(href="/admin/perfil")
-                    i.material-icons face
-                    | Perfil
+                if page == 'perfil'
+                    a(href="/admin/perfil").active
+                        i.material-icons face
+                        | Perfil
+                else
+                    a(href="/admin/perfil")
+                        i.material-icons face
+                        | Perfil
             li
                 a(href="/admin/logout")
                     i.material-icons exit_to_app

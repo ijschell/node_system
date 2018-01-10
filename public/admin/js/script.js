@@ -19,7 +19,7 @@ $(document).on('click', '#contentSections .actions .edit', function(e){
 $(document).on('blur', '#perfilSection input[name="pass"]', function(){
 
     if($(this).val() != $('#perfilSection input[name="pass_confirmation"]').val()){
-        $('#perfilSection .msj.error').html('Las contraseñas no son deben ser iguales.');
+        $('#perfilSection .msj.error').html('Las contraseñas deben ser iguales.');
     }else {
         $('#perfilSection .msj.error').html('');
     }
@@ -37,10 +37,20 @@ $.validate({
 function activeTinymce(){
 
     ClassicEditor
-        .create( document.querySelector( '.editor' ))
+        .create( document.querySelector( '#editor' ))
         .catch( error => {
             console.error( error );
         } );
+
+    $('#contentSections .section').each(function(k, v){
+
+        ClassicEditor
+            .create( document.querySelector( '#editor_' + k ))
+            .catch( error => {
+                console.error( error );
+            } );
+
+    })
 
 }
 

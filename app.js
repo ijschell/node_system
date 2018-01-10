@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 var auth = require('./server/auth.js');
 var cookieParser = require('cookie-parser');
+var cliente = require('./server/client_info.js');
 
 // paths
 var client = __dirname + '/public/client';
@@ -41,7 +42,11 @@ app.use(cookieParser());
 
 // routes
 // gets
-app.get('*', function(req, res) {
+app.get('/admin', function(req, res) {
+    res.redirect('/admin/home');
+})
+
+app.get('/admin/*', function(req, res) {
 
     if (req.cookies.Authorization != undefined) {
 
@@ -140,6 +145,56 @@ app.post('/admin/login', upload.array('image', 12), function(req, res) {
     auth.login(req.body, res, admin);
 
 })
+
+
+
+
+
+// CLIENT SIDE
+
+// home
+app.get('/', function(req, res){
+
+    res.render(client + '/views/home');
+
+})
+
+app.post('/home_data', function(req, res){
+
+    // preparo datos para home
+    var json = {
+        info : {
+            config : '',
+            sections : '',
+            contact : ''
+        }
+    };
+
+    cliente.getInformation('sections', function(data){
+
+        // set sections
+        json.info.sections = data;
+
+        cliente.getInformation('config', function(data){
+
+            // set config
+            json.info.config = data[0];
+
+            cliente.getInformation('contact', function(data){
+
+                // set contact data
+                json.info.contact = data[0];
+
+                res.json(json);
+
+            });
+
+        });
+
+    });
+
+})
+
 
 
 // listen sever

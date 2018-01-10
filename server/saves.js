@@ -89,6 +89,7 @@ exports.getSave = function(req, res, path){
 
             database.update("UPDATE perfil SET pass = '"+md5(req.pass_confirmation)+"' WHERE 1", function(data){
                 console.log('Perfil actualizado!');
+                res.message = 'Perfil actualizado!';
                 routes.routes('/admin/perfil', res, path);
             });
 

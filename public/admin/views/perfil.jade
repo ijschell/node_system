@@ -4,17 +4,30 @@ include header.jade
 
 div#main_content
     h2 Perfil
-    div#perfilSection    
-            div
-                form(action="/admin/perfil" method="post" encType="multipart/form-data")
+    div#perfilSection
+        div.description
+            p Puede cambiar su contraseña llenando los dos campos iguales.
+            ul
+                li Ambos campos son obligatorios.
+                li La contraseña debe superar los 8 carácteres.
+                li Las contraseñas ingresadas deber ser exactamente iguales.
+        div.row
+            form(action="/admin/perfil" method="post" encType="multipart/form-data")
+                div.col-md-6
                     input(type="hidden" name="section" value="perfil")
                     label Nueva Contraseña
                     input(type="password" name="pass_confirmation" data-validation="length" data-validation-length="min8")
-                    br
+                div.col-md-6
                     label Repite Contraseña
                     input(type="password" name="pass")
+                div.col-md-12
+                    input(type="submit" value="Guardar" class="confirm")
                     p(class="msj error")
-                    br
-                    input(type="submit" value="Guardar")
-  
+                    if typeof(message) !== 'undefined'
+                        p(class="msj success") #{message}
+                    
+                        
+                    
+                
+
 include footer.jade

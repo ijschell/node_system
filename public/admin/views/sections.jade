@@ -59,7 +59,8 @@ div#main_content
                                 input(type="text" name="title" value="#{section.title}")
                                 br
                                 label Descripción
-                                input(type="text" name="description" value="#{section.description}")                                
+                                textarea(name="description" id="editor_#{i}") #{section.description}
+                                //- input(type="text" name="description" value="#{section.description}")                                
                                 br
                                 input(type="submit" value="Guardar" class="confirm")
                                 div.clear
