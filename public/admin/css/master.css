@@ -69,6 +69,19 @@ body {
   top: 0;
   left: 0;
   z-index: 5; }
+  #header p.welcome {
+    font-size: 20px;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 30px;
+    transform: translateY(-50%); }
+  #header a.logotipo {
+    float: right; }
+    #header a.logotipo img {
+      height: 50px;
+      margin-top: calc((70px - 50px) / 2);
+      margin-right: 30px; }
 
 #sidebar {
   position: fixed;

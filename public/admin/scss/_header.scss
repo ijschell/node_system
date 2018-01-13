@@ -6,4 +6,20 @@
     top: 0;
     left: 0;
     z-index: 5;
+    p.welcome{
+        font-size: 20px;
+        color: #fff;
+        position: absolute;
+        top: 50%;
+        left: 30px;
+        transform: translateY(-50%);
+    }
+    a.logotipo{
+        float: right;
+        img{
+            height: 50px;
+            margin-top: calc((70px - 50px) / 2);
+            margin-right: 30px;
+        }
+    }
 }

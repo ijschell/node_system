@@ -20,6 +20,14 @@ function refreshConfig(){
 
 }
 
+var adminName = '';
+
+database.select("SELECT * FROM contact", function(data){
+
+    adminName = data[0].name;
+
+})
+
 
 exports.routes = function(req, res, path, message){
 
@@ -52,11 +60,14 @@ exports.routes = function(req, res, path, message){
 
 function adminHome(res, path){
     console.log('Admin Home');
+
     res.render(path + '/views/home', {
         config : app.get('config'),
         author : app.get('author'),
+        admin_name : adminName,
         page : 'home'
     });
+
 }
 
 
@@ -71,6 +82,7 @@ function adminSections(res, path){
             config : app.get('config'),
             author : app.get('author'),
             sections : sections,
+            admin_name : adminName,
             page : 'sections'
         });
     })
@@ -88,6 +100,7 @@ function adminContact(res, path){
             config : app.get('config'),
             author : app.get('author'),
             contact_data : contactData,
+            admin_name : adminName,
             page : 'contact'
         });
     })
@@ -100,6 +113,7 @@ function adminPerfil(res, path){
     res.render(path + '/views/perfil', {
         config : app.get('config'),
         author : app.get('author'),
+        admin_name : adminName,
         page : 'perfil',
         message : res.message
     });
