@@ -33,7 +33,7 @@ div#main_content
                     div(class="col-md-4 section id_" + section.id)
                         div.view_content
                             if section.image.length > 0
-                                div.image(style="background-image: url(../admin/files/" + section.image data-name=section.image)")
+                                div.image(style='background-image: url("../admin/files/' + section.image + '")' data-name='#{section.image}')
                             else
                                 div.image(style="background-image: url(../admin/files/sin_imagen.jpg")
                             h3 #{section.title}
@@ -48,7 +48,7 @@ div#main_content
                                 input(type="hidden" name="id" value="#{section.id}")
                                 input(type="hidden" name="old_image" value="#{section.image}")
                                 if section.image.length > 0
-                                    div.image(style="background-image: url(../admin/files/" + section.image data-name=section.image)")
+                                    div.image(style='background-image: url("../admin/files/' + section.image data-name=section.image + '")')
                                 else
                                     div.image(style="background-image: url(../admin/files/sin_imagen.jpg")
                                 br
